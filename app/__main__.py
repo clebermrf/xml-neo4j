@@ -1,10 +1,11 @@
+import uvicorn
 from fastapi import FastAPI, Response, APIRouter, Request
 import os
 from parsers import Uniprot
 from drivers import Neo4jConnector
 
 
-NEO4J_URI = "neo4j://localhost:7687"
+NEO4J_URI = "neo4j://neo4j:7687"
 NEO4J_USER = "neo4j"
 NEO4J_PASSWORD = "adminneo4j"
 
@@ -30,3 +31,7 @@ async def protein(request: Request):
         protein.gene_synonym
     )
     app.close()
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='app', port=8080)
