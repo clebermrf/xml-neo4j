@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  neo4j:
+    image: neo4j:latest
+    ports:
+      - "7474:7474"
+      - "7473:7473"
+      - "7687:7687"
+  app:
+    image: python
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/var/lib/app
+    command: bash -c "
+      pip install -r /var/lib/app/requirements.txt &&
+      python /var/lib/app"
